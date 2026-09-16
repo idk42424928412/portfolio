@@ -4,213 +4,167 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Justin — Maker & Web Developer</title>
-  
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:ital,wght@1,400;1,500&display=swap');
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #fcfbf9;
-      color: #242220;
-    }
-
-    .serif-quote {
-      font-family: 'Newsreader', serif;
-      font-style: italic;
-    }
-
-    /* Hand-crafted card interactions */
-    .note-card {
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .note-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -10px rgba(0,0,0,0.06);
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfbf9; color: #242220; }
   </style>
 </head>
-<body class="antialiased selection:bg-amber-100 selection:text-amber-900">
+<body class="antialiased selection:bg-amber-100">
 
-  <!-- ==================== HEADER ==================== -->
   <header class="max-w-2xl mx-auto px-6 pt-12 pb-8 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-full bg-amber-100 border border-amber-200/60 flex items-center justify-center font-semibold text-amber-900 text-sm">
-        J
-      </div>
+      <div class="w-9 h-9 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center font-semibold text-amber-900 text-sm">J</div>
       <div>
-        <h1 class="font-bold text-sm tracking-tight text-neutral-900">Justin</h1>
+        <h1 class="font-bold text-sm text-neutral-900">Justin</h1>
         <p class="text-xs text-neutral-500">Netherlands 🇳🇱</p>
       </div>
     </div>
-
-    <nav class="flex items-center gap-5 text-xs font-medium text-neutral-600">
-      <a href="#work" class="hover:text-neutral-900 transition-colors">Work</a>
-      <a href="#about" class="hover:text-neutral-900 transition-colors">About</a>
-      <a href="mailto:justin@example.com" class="px-3 py-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 transition-colors">Contact</a>
+    <nav class="flex items-center gap-4 text-xs font-medium text-neutral-600">
+      <a href="#work" class="hover:text-neutral-900">Work</a>
+      <a href="#contact" class="hover:text-neutral-900">Contact</a>
+      <a href="admin.html" class="text-neutral-400 hover:text-neutral-800">🔒 Admin</a>
     </nav>
   </header>
 
-  <main class="max-w-2xl mx-auto px-6 space-y-16 pb-20">
+  <main class="max-w-2xl mx-auto px-6 space-y-12 pb-20">
 
-    <!-- ==================== HERO ==================== -->
-    <section class="pt-6 space-y-4">
-      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 leading-snug">
-        I build straightforward web tools, quiet interfaces, and clean code.
+    <section class="space-y-3">
+      <h2 class="text-3xl font-bold tracking-tight text-neutral-900">
+        I build straightforward web tools and clean code.
       </h2>
-      <p class="text-neutral-600 leading-relaxed text-base">
-        Hey! I'm Justin, a developer based in the Netherlands. I like making fast web applications that don't feel cluttered or overly corporate. Here are a few things I've built recently.
+      <p class="text-neutral-600 text-sm leading-relaxed">
+        Hey! I'm Justin, a web developer based in the Netherlands. Below are the projects managed live from my database.
       </p>
     </section>
 
-    <!-- ==================== WORK / PROJECTS ==================== -->
-    <section id="work" class="space-y-6">
-      <div class="flex items-center justify-between border-b border-neutral-200/80 pb-3">
-        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Selected Projects</span>
-        <span class="text-xs text-neutral-400">Click any card to inspect</span>
+    <!-- LIVE PROJECTS FROM BACKEND -->
+    <section id="work" class="space-y-4">
+      <div class="border-b border-neutral-200 pb-2">
+        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Projects</span>
       </div>
-
-      <div class="space-y-4">
-
-        <!-- Project 1 -->
-        <article class="note-card bg-white border border-neutral-200/80 rounded-2xl p-6 cursor-pointer" onclick="showDetails('Analytics Reader', 'A minimal dashboard that turns heavy API metrics into readable, clear daily summaries.', ['TypeScript', 'React', 'Tailwind'])">
-          <div class="flex items-start justify-between gap-4">
-            <div class="space-y-1">
-              <span class="text-xs text-amber-800 font-medium bg-amber-50 px-2 py-0.5 rounded border border-amber-200/50">Web App</span>
-              <h3 class="text-lg font-bold text-neutral-900 pt-1">Analytics Reader</h3>
-              <p class="text-neutral-600 text-sm leading-relaxed">
-                A lightweight dashboard that cuts out noise and translates heavy web traffic numbers into clean daily summaries.
-              </p>
-            </div>
-            <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-400 shrink-0"></i>
-          </div>
-          <div class="flex items-center gap-2 mt-4 text-xs text-neutral-500 font-mono">
-            <span>React</span> • <span>Tailwind</span> • <span>Node.js</span>
-          </div>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="note-card bg-white border border-neutral-200/80 rounded-2xl p-6 cursor-pointer" onclick="showDetails('Minimal Storefront', 'A streamlined e-commerce layout built for fast load times and distraction-free checkout.', ['Next.js', 'Stripe', 'Tailwind'])">
-          <div class="flex items-start justify-between gap-4">
-            <div class="space-y-1">
-              <span class="text-xs text-emerald-800 font-medium bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/50">E-Commerce</span>
-              <h3 class="text-lg font-bold text-neutral-900 pt-1">Minimal Storefront</h3>
-              <p class="text-neutral-600 text-sm leading-relaxed">
-                An intentional online shop layout designed to load almost instantly and make buying simple.
-              </p>
-            </div>
-            <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-400 shrink-0"></i>
-          </div>
-          <div class="flex items-center gap-2 mt-4 text-xs text-neutral-500 font-mono">
-            <span>Next.js</span> • <span>Stripe</span> • <span>Tailwind</span>
-          </div>
-        </article>
-
-        <!-- Project 3 -->
-        <article class="note-card bg-white border border-neutral-200/80 rounded-2xl p-6 cursor-pointer" onclick="showDetails('Personal Notes & Canvas', 'A local-first browser notepad for organizing thoughts and project specs.', ['JavaScript', 'HTML5', 'CSS'])">
-          <div class="flex items-start justify-between gap-4">
-            <div class="space-y-1">
-              <span class="text-xs text-indigo-800 font-medium bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200/50">Tooling</span>
-              <h3 class="text-lg font-bold text-neutral-900 pt-1">Browser Scratchpad</h3>
-              <p class="text-neutral-600 text-sm leading-relaxed">
-                A simple local note-taking canvas that saves everything straight to your browser storage without accounts or trackers.
-              </p>
-            </div>
-            <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-400 shrink-0"></i>
-          </div>
-          <div class="flex items-center gap-2 mt-4 text-xs text-neutral-500 font-mono">
-            <span>JavaScript</span> • <span>LocalStorage</span> • <span>CSS</span>
-          </div>
-        </article>
-
+      <div id="projectsContainer" class="space-y-3">
+        <p class="text-xs text-neutral-400">Loading projects...</p>
       </div>
     </section>
 
-    <!-- ==================== STACK ==================== -->
-    <section class="space-y-4">
-      <div class="border-b border-neutral-200/80 pb-3">
-        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">What I work with</span>
-      </div>
-      <p class="text-sm text-neutral-600 leading-relaxed">
-        I like keeping dependencies lightweight and practical. My daily tools include 
-        <strong class="text-neutral-900 font-medium">JavaScript / TypeScript</strong>, 
-        <strong class="text-neutral-900 font-medium">React</strong>, 
-        <strong class="text-neutral-900 font-medium">Tailwind CSS</strong>, and 
-        <strong class="text-neutral-900 font-medium">Node.js</strong>.
-      </p>
-    </section>
+    <!-- CONTACT FORM -->
+    <section id="contact" class="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-4 shadow-sm">
+      <h3 class="text-base font-bold text-neutral-900">Send me a message</h3>
+      <form id="contactForm" class="space-y-3">
+        <input type="text" id="senderName" placeholder="Your Name" required class="w-full px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:border-amber-400">
+        <textarea id="senderMsg" placeholder="What's on your mind?" required rows="3" class="w-full px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:border-amber-400"></textarea>
+        <button type="submit" class="bg-neutral-900 text-white font-medium text-xs px-5 py-2.5 rounded-xl hover:bg-neutral-800 transition-colors">Send Message</button>
+      </form>
 
-    <!-- ==================== ABOUT ==================== -->
-    <section id="about" class="space-y-4">
-      <div class="border-b border-neutral-200/80 pb-3">
-        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">A bit about me</span>
-      </div>
-      <div class="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-3 text-neutral-600 text-sm leading-relaxed">
-        <p>
-          I'm Justin, a web developer based in the Netherlands. I enjoy turning rough ideas into working prototypes and refining them until they feel natural to use.
-        </p>
-        <p class="serif-quote text-base text-neutral-700">
-          "Good software doesn't need to yell to be noticed."
-        </p>
-      </div>
-    </section>
-
-    <!-- ==================== CONTACT ==================== -->
-    <section class="bg-amber-100/60 border border-amber-200/60 rounded-2xl p-6 text-center space-y-3">
-      <h3 class="text-lg font-bold text-neutral-900">Want to start a project?</h3>
-      <p class="text-xs text-neutral-600 max-w-sm mx-auto">
-        Feel free to send me an email. I'm usually quick to reply.
-      </p>
-      <div>
-        <a href="mailto:justin@example.com" class="inline-block bg-neutral-900 text-white font-medium text-xs px-5 py-2.5 rounded-xl hover:bg-neutral-800 transition-colors">
-          Send me an Email
-        </a>
+      <!-- LIVE REPLIES DISPLAY AREA -->
+      <div id="replyBox" class="hidden mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-1">
+        <p class="text-xs font-bold text-amber-900">Justin replied to your message:</p>
+        <p id="replyText" class="text-xs text-amber-800"></p>
       </div>
     </section>
 
   </main>
 
-  <footer class="max-w-2xl mx-auto px-6 pb-12 text-center text-xs text-neutral-400 border-t border-neutral-200/60 pt-6">
-    Built simply by Justin • Netherlands 🇳🇱
-  </footer>
-
-  <!-- ==================== MODAL ==================== -->
-  <div id="modal" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white border border-neutral-200 rounded-2xl max-w-sm w-full p-6 space-y-4 relative shadow-xl">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-900">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-      <h3 id="mTitle" class="text-lg font-bold text-neutral-900"></h3>
-      <p id="mDesc" class="text-neutral-600 text-xs leading-relaxed"></p>
-      <div id="mTags" class="flex flex-wrap gap-1.5 font-mono text-[11px] text-neutral-500"></div>
-      <button onclick="closeModal()" class="w-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-medium text-xs py-2 rounded-lg transition-colors">
-        Close
-      </button>
+  <!-- NOTIFICATION PERMISSION MODAL -->
+  <div id="notifyModal" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-neutral-200 rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
+      <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto">
+        <i data-lucide="bell" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-base font-bold text-neutral-900">Message Sent!</h3>
+      <p class="text-neutral-600 text-xs leading-relaxed">
+        Do you want me to send you a browser notification when Justin replies?
+      </p>
+      <div class="flex gap-3 pt-2">
+        <button onclick="closeNotifyModal(false)" class="flex-1 bg-neutral-100 text-neutral-700 font-medium text-xs py-2.5 rounded-xl">
+          Block / No
+        </button>
+        <button onclick="closeNotifyModal(true)" class="flex-1 bg-neutral-900 text-white font-medium text-xs py-2.5 rounded-xl">
+          Allow Notifications
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
     lucide.createIcons();
 
-    function showDetails(title, desc, tags) {
-      document.getElementById('mTitle').textContent = title;
-      document.getElementById('mDesc').textContent = desc;
-      const tagsContainer = document.getElementById('mTags');
-      tagsContainer.innerHTML = '';
-      tags.forEach(t => {
-        const span = document.createElement('span');
-        span.className = 'bg-neutral-100 px-2 py-0.5 rounded';
-        span.textContent = t;
-        tagsContainer.appendChild(span);
+    // SUPABASE CREDENTIALS
+    const SUPABASE_URL = 'https://bitrfhftckdrtdbbflbo.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpdHJmaGZ0Y2tkcnRkYmJmbGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1Njc0ODEsImV4cCI6MjEwNTE0MzQ4MX0.4e-iRsKl9KBiev5Qt3DWl0iI4tZ_ltKN5RHY9abjyo4';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let activeMessageId = null;
+
+    // Load Projects from Database
+    async function loadProjects() {
+      const { data: projects, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+      const container = document.getElementById('projectsContainer');
+      container.innerHTML = '';
+
+      if (error || !projects.length) {
+        container.innerHTML = '<p class="text-xs text-neutral-400">No projects added yet.</p>';
+        return;
+      }
+
+      projects.forEach(p => {
+        container.innerHTML += `
+          <div class="bg-white border border-neutral-200/80 rounded-xl p-5 space-y-2">
+            <h4 class="font-bold text-sm text-neutral-900">${p.title}</h4>
+            <p class="text-xs text-neutral-600">${p.description}</p>
+            <span class="inline-block text-[10px] font-mono bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded">${p.tech}</span>
+          </div>
+        `;
       });
-      document.getElementById('modal').classList.remove('hidden');
     }
 
-    function closeModal() {
-      document.getElementById('modal').classList.add('hidden');
+    // Submit Message to Backend
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value;
+      const message = document.getElementById('senderMsg').value;
+
+      const { data, error } = await supabase.from('messages').insert([{ sender_name: name, message }]).select();
+      
+      if (!error && data.length) {
+        activeMessageId = data[0].id;
+        document.getElementById('contactForm').reset();
+        document.getElementById('notifyModal').classList.remove('hidden');
+        listenForReply(activeMessageId);
+      }
+    });
+
+    // Handle Visitor Notification Choice
+    async function closeNotifyModal(allow) {
+      document.getElementById('notifyModal').classList.add('hidden');
+      if (allow && "Notification" in window) {
+        const perm = await Notification.requestPermission();
+        if (perm === "granted") {
+          new Notification("Justin's Portfolio", { body: "Notifications enabled! You'll be notified when Justin replies." });
+        }
+      }
     }
+
+    // Real-Time Database Subscription (Catches your replies instantly)
+    function listenForReply(messageId) {
+      supabase.channel('public:messages')
+        .on('postgres_changes', { event: 'UPDATE', filter: `id=eq.${messageId}`, table: 'messages' }, payload => {
+          if (payload.new.reply) {
+            document.getElementById('replyBox').classList.remove('hidden');
+            document.getElementById('replyText').textContent = payload.new.reply;
+
+            if ("Notification" in window && Notification.permission === "granted") {
+              new Notification("Justin replied to your message!", { body: payload.new.reply });
+            }
+          }
+        })
+        .subscribe();
+    }
+
+    loadProjects();
   </script>
 </body>
 </html>
