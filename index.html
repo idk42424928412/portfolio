@@ -1,325 +1,216 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Justin | Builder & Web Developer</title>
+  <title>Justin — Maker & Web Developer</title>
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['Fira Code', 'monospace']
-          },
-          colors: {
-            accent: '#00f0ff',
-            card: '#121216',
-            surface: '#0a0a0d'
-          }
-        }
-      }
-    }
-  </script>
-  
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  
+
   <style>
-    /* Custom Grain Overlay for Organic Vibe */
-    .bg-grain {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
-      background-size: 24px 24px;
-    }
-    
-    /* Interactive Glowing Hover Card Effect */
-    .vibe-card {
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-    .vibe-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 240, 255, 0.4);
-      box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.15);
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:ital,wght@1,400;1,500&display=swap');
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #fcfbf9;
+      color: #242220;
     }
 
-    /* Terminal Cursor Animation */
-    .cursor-blink {
-      animation: blink 1s step-end infinite;
+    .serif-quote {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
     }
-    @keyframes blink {
-      50% { opacity: 0; }
+
+    /* Hand-crafted card interactions */
+    .note-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .note-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -10px rgba(0,0,0,0.06);
     }
   </style>
 </head>
-<body class="bg-surface text-gray-200 font-sans antialiased selection:bg-cyan-500 selection:text-black min-h-screen bg-grain">
+<body class="antialiased selection:bg-amber-100 selection:text-amber-900">
 
   <!-- ==================== HEADER ==================== -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-surface/80 border-b border-white/5">
-    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#" class="font-mono text-sm tracking-wider font-semibold hover:text-cyan-400 transition-colors">
-        justin<span class="text-cyan-400">.dev</span>
-      </a>
-      
-      <div class="flex items-center space-x-6 text-sm font-mono">
-        <a href="#work" class="hover:text-cyan-400 transition-colors">/work</a>
-        <a href="#stack" class="hover:text-cyan-400 transition-colors">/stack</a>
-        <a href="#about" class="hover:text-cyan-400 transition-colors">/about</a>
-        <a href="#contact" class="px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-all">
-          ping me
-        </a>
+  <header class="max-w-2xl mx-auto px-6 pt-12 pb-8 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-amber-100 border border-amber-200/60 flex items-center justify-center font-semibold text-amber-900 text-sm">
+        J
+      </div>
+      <div>
+        <h1 class="font-bold text-sm tracking-tight text-neutral-900">Justin</h1>
+        <p class="text-xs text-neutral-500">Netherlands 🇳🇱</p>
       </div>
     </div>
+
+    <nav class="flex items-center gap-5 text-xs font-medium text-neutral-600">
+      <a href="#work" class="hover:text-neutral-900 transition-colors">Work</a>
+      <a href="#about" class="hover:text-neutral-900 transition-colors">About</a>
+      <a href="mailto:justin@example.com" class="px-3 py-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 transition-colors">Contact</a>
+    </nav>
   </header>
 
-  <main class="max-w-4xl mx-auto px-6 space-y-28 py-16">
+  <main class="max-w-2xl mx-auto px-6 space-y-16 pb-20">
 
-    <!-- ==================== HERO SECTION ==================== -->
-    <section class="space-y-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-mono">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        Netherlands 🇳🇱 • Open to build cool things
-      </div>
-
-      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
-        Hey, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Justin</span>. <br>
-        I turn ideas into functional, fast web apps.
-      </h1>
-
-      <p class="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">
-        Full-stack engineer obsessed with clean user interfaces, performance, and building digital stuff that feels effortlessly good to use.
+    <!-- ==================== HERO ==================== -->
+    <section class="pt-6 space-y-4">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 leading-snug">
+        I build straightforward web tools, quiet interfaces, and clean code.
+      </h2>
+      <p class="text-neutral-600 leading-relaxed text-base">
+        Hey! I'm Justin, a developer based in the Netherlands. I like making fast web applications that don't feel cluttered or overly corporate. Here are a few things I've built recently.
       </p>
-
-      <!-- Terminal / Status Window -->
-      <div class="bg-card border border-white/10 rounded-xl p-4 font-mono text-xs text-gray-400 max-w-xl space-y-2 shadow-2xl">
-        <div class="flex items-center gap-2 pb-2 border-b border-white/5">
-          <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
-          <span class="text-gray-600 ml-2">justin@nl-station:~</span>
-        </div>
-        <p class="text-gray-300">$ status --current</p>
-        <p class="text-cyan-400">→ Crafting full-stack projects & exploring modern UI micro-interactions.</p>
-        <p class="text-gray-300">$ stack --primary</p>
-        <p class="text-indigo-300">→ TypeScript, React, Next.js, Node.js, TailwindCSS</p>
-        <p class="text-gray-500">$ <span class="cursor-blink">█</span></p>
-      </div>
     </section>
 
-    <!-- ==================== SELECTED WORK ==================== -->
-    <section id="work" class="space-y-8">
-      <div class="flex items-end justify-between border-b border-white/10 pb-4">
-        <div>
-          <h2 class="text-2xl font-bold text-white">Selected Projects</h2>
-          <p class="text-gray-400 text-sm mt-1">Real builds, side experiments, and creative tools.</p>
-        </div>
-        <span class="text-xs font-mono text-cyan-400">03 items</span>
+    <!-- ==================== WORK / PROJECTS ==================== -->
+    <section id="work" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-neutral-200/80 pb-3">
+        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Selected Projects</span>
+        <span class="text-xs text-neutral-400">Click any card to inspect</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
 
-        <!-- Project Card 1 -->
-        <div class="vibe-card bg-card border border-white/10 rounded-2xl p-6 flex flex-col justify-between group cursor-pointer" onclick="openModal('Dashboard Tool', 'A real-time workspace for monitoring web apps, live performance metrics, and API health.', ['React', 'Node.js', 'Tailwind'], 'https://github.com')">
-          <div class="space-y-4">
-            <div class="flex justify-between items-start">
-              <div class="p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-xl text-cyan-400">
-                <i data-lucide="layout-grid" class="w-6 h-6"></i>
-              </div>
-              <i data-lucide="arrow-up-right" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
+        <!-- Project 1 -->
+        <article class="note-card bg-white border border-neutral-200/80 rounded-2xl p-6 cursor-pointer" onclick="showDetails('Analytics Reader', 'A minimal dashboard that turns heavy API metrics into readable, clear daily summaries.', ['TypeScript', 'React', 'Tailwind'])">
+          <div class="flex items-start justify-between gap-4">
+            <div class="space-y-1">
+              <span class="text-xs text-amber-800 font-medium bg-amber-50 px-2 py-0.5 rounded border border-amber-200/50">Web App</span>
+              <h3 class="text-lg font-bold text-neutral-900 pt-1">Analytics Reader</h3>
+              <p class="text-neutral-600 text-sm leading-relaxed">
+                A lightweight dashboard that cuts out noise and translates heavy web traffic numbers into clean daily summaries.
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Realtime Workspace</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">
-              A streamlined dashboard that monitors server uptime, API responses, and user activities with live visual charts.
-            </p>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-400 shrink-0"></i>
           </div>
-          <div class="flex flex-wrap gap-2 pt-6 font-mono text-xs text-gray-400">
-            <span class="px-2 py-1 bg-white/5 rounded border border-white/5">React</span>
-            <span class="px-2 py-1 bg-white/5 rounded border border-white/5">Node.js</span>
-            <span class="px-2 py-1 bg-white/5 rounded border border-white/5">Tailwind</span>
+          <div class="flex items-center gap-2 mt-4 text-xs text-neutral-500 font-mono">
+            <span>React</span> • <span>Tailwind</span> • <span>Node.js</span>
           </div>
-        </div>
+        </article>
 
-        <!-- Project Card 2 -->
-        <div class="vibe-card bg-card border border-white/10 rounded-2xl p-6 flex flex-col justify-between group cursor-pointer" onclick="openModal('Minimal E-Commerce', 'Custom storefront designed with speed and seamless checkout UX in mind.', ['Next.js', 'Stripe', 'Tailwind'], 'https://github.com')">
-          <div class="space-y-4">
-            <div class="flex justify-between items-start">
-              <div class="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-indigo-400">
-                <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-              </div>
-              <i data-lucide="arrow-up-right" class="w-5 h-5 text-gray-500 group-hover:text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
+        <!-- Project 2 -->
+        <article class="note-card bg-white border border-neutral-200/80 rounded-2xl p-6 cursor-pointer" onclick="showDetails('Minimal Storefront', 'A streamlined e-commerce layout built for fast load times and distraction-free checkout.', ['Next.js', 'Stripe', 'Tailwind'])">
+          <div class="flex items-start justify-between gap-4">
+            <div class="space-y-1">
+              <span class="text-xs text-emerald-800 font-medium bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/50">E-Commerce</span>
+              <h3 class="text-lg font-bold text-neutral-900 pt-1">Minimal Storefront</h3>
+              <p class="text-neutral-600 text-sm leading-relaxed">
+                An intentional online shop layout designed to load almost instantly and make buying simple.
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Sleek Web Store</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">
-              A high-conversion e-commerce template with instantaneous product search, dark mode aesthetics, and Stripe checkout.
-            </p>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-400 shrink-0"></i>
           </div>
-          <div class="flex flex-wrap gap-2 pt-6 font-mono text-xs text-gray-400">
-            <span class="px-2 py-1 bg-white/5 rounded border border-white/5">Next.js</span>
-            <span class="px-2 py-1 bg-white/5 rounded border border-white/5">Stripe</span>
-            <span class="px-2 py-1 bg-white/5 rounded border border-white/5">Tailwind</span>
+          <div class="flex items-center gap-2 mt-4 text-xs text-neutral-500 font-mono">
+            <span>Next.js</span> • <span>Stripe</span> • <span>Tailwind</span>
           </div>
-        </div>
+        </article>
 
-        <!-- Project Card 3 (Full Width Span) -->
-        <div class="vibe-card md:col-span-2 bg-card border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 group cursor-pointer" onclick="openModal('Developer Toolkit', 'A collection of developer micro-tools and UI components made for web creators.', ['TypeScript', 'Vite', 'HTML/CSS'], 'https://github.com')">
-          <div class="space-y-2 max-w-xl">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-mono text-emerald-400">Featured Tooling</span>
+        <!-- Project 3 -->
+        <article class="note-card bg-white border border-neutral-200/80 rounded-2xl p-6 cursor-pointer" onclick="showDetails('Personal Notes & Canvas', 'A local-first browser notepad for organizing thoughts and project specs.', ['JavaScript', 'HTML5', 'CSS'])">
+          <div class="flex items-start justify-between gap-4">
+            <div class="space-y-1">
+              <span class="text-xs text-indigo-800 font-medium bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200/50">Tooling</span>
+              <h3 class="text-lg font-bold text-neutral-900 pt-1">Browser Scratchpad</h3>
+              <p class="text-neutral-600 text-sm leading-relaxed">
+                A simple local note-taking canvas that saves everything straight to your browser storage without accounts or trackers.
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Developer UI Component Lab</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">
-              An open-source library featuring copy-pasteable layout snippets, micro-animations, and custom dark-theme elements.
-            </p>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-400 shrink-0"></i>
           </div>
-          <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-            <div class="flex gap-2 font-mono text-xs text-gray-400">
-              <span class="px-2 py-1 bg-white/5 rounded border border-white/5">TypeScript</span>
-              <span class="px-2 py-1 bg-white/5 rounded border border-white/5">UI/UX</span>
-            </div>
-            <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400">
-              <i data-lucide="layers" class="w-5 h-5"></i>
-            </div>
+          <div class="flex items-center gap-2 mt-4 text-xs text-neutral-500 font-mono">
+            <span>JavaScript</span> • <span>LocalStorage</span> • <span>CSS</span>
           </div>
-        </div>
+        </article>
 
       </div>
     </section>
 
-    <!-- ==================== TECH STACK ==================== -->
-    <section id="stack" class="space-y-6">
-      <div class="border-b border-white/10 pb-4">
-        <h2 class="text-2xl font-bold text-white">Favorite Tech & Arsenal</h2>
-        <p class="text-gray-400 text-sm mt-1">Tools I reach for when starting something new.</p>
+    <!-- ==================== STACK ==================== -->
+    <section class="space-y-4">
+      <div class="border-b border-neutral-200/80 pb-3">
+        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">What I work with</span>
       </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-sm">
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="code-2" class="text-cyan-400 w-5 h-5"></i>
-          <span>TypeScript</span>
-        </div>
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="atom" class="text-sky-400 w-5 h-5"></i>
-          <span>React / Next</span>
-        </div>
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="wind" class="text-teal-400 w-5 h-5"></i>
-          <span>Tailwind CSS</span>
-        </div>
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="server" class="text-emerald-400 w-5 h-5"></i>
-          <span>Node.js</span>
-        </div>
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="database" class="text-indigo-400 w-5 h-5"></i>
-          <span>PostgreSQL</span>
-        </div>
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="git-branch" class="text-orange-400 w-5 h-5"></i>
-          <span>Git / GitHub</span>
-        </div>
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="figma" class="text-pink-400 w-5 h-5"></i>
-          <span>Figma</span>
-        </div>
-        <div class="bg-card border border-white/5 hover:border-cyan-500/30 p-4 rounded-xl flex items-center gap-3 transition-colors">
-          <i data-lucide="terminal" class="text-yellow-400 w-5 h-5"></i>
-          <span>Linux / Bash</span>
-        </div>
-      </div>
+      <p class="text-sm text-neutral-600 leading-relaxed">
+        I like keeping dependencies lightweight and practical. My daily tools include 
+        <strong class="text-neutral-900 font-medium">JavaScript / TypeScript</strong>, 
+        <strong class="text-neutral-900 font-medium">React</strong>, 
+        <strong class="text-neutral-900 font-medium">Tailwind CSS</strong>, and 
+        <strong class="text-neutral-900 font-medium">Node.js</strong>.
+      </p>
     </section>
 
-    <!-- ==================== ABOUT / VIBE ==================== -->
-    <section id="about" class="space-y-6">
-      <div class="border-b border-white/10 pb-4">
-        <h2 class="text-2xl font-bold text-white">About Me</h2>
+    <!-- ==================== ABOUT ==================== -->
+    <section id="about" class="space-y-4">
+      <div class="border-b border-neutral-200/80 pb-3">
+        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">A bit about me</span>
       </div>
-
-      <div class="bg-card border border-white/10 rounded-2xl p-6 md:p-8 space-y-4 text-gray-300 leading-relaxed">
+      <div class="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-3 text-neutral-600 text-sm leading-relaxed">
         <p>
-          I'm a software developer based in the Netherlands with a deep passion for craft, code quality, and great user experiences. I don't just write code that compiles — I like making things that look sharp, feel snappy, and make sense.
+          I'm Justin, a web developer based in the Netherlands. I enjoy turning rough ideas into working prototypes and refining them until they feel natural to use.
         </p>
-        <p>
-          When I'm not in my code editor, you'll probably find me experimenting with new web technologies, tweaking my developer setup, or drinking good coffee while brainstorming the next project idea.
+        <p class="serif-quote text-base text-neutral-700">
+          "Good software doesn't need to yell to be noticed."
         </p>
       </div>
     </section>
 
-    <!-- ==================== CONTACT / FOOTER ==================== -->
-    <section id="contact" class="space-y-6 text-center py-10">
-      <div class="max-w-md mx-auto space-y-4">
-        <h2 class="text-3xl font-extrabold text-white">Let's build something.</h2>
-        <p class="text-gray-400 text-sm">
-          Got a project idea, a job opportunity, or just want to chat tech? Drop me a message anytime.
-        </p>
-        <div class="pt-2">
-          <a href="mailto:justin@example.com" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-indigo-500 hover:opacity-90 text-black font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-cyan-500/20">
-            <i data-lucide="mail" class="w-4 h-4"></i> Say Hello
-          </a>
-        </div>
+    <!-- ==================== CONTACT ==================== -->
+    <section class="bg-amber-100/60 border border-amber-200/60 rounded-2xl p-6 text-center space-y-3">
+      <h3 class="text-lg font-bold text-neutral-900">Want to start a project?</h3>
+      <p class="text-xs text-neutral-600 max-w-sm mx-auto">
+        Feel free to send me an email. I'm usually quick to reply.
+      </p>
+      <div>
+        <a href="mailto:justin@example.com" class="inline-block bg-neutral-900 text-white font-medium text-xs px-5 py-2.5 rounded-xl hover:bg-neutral-800 transition-colors">
+          Send me an Email
+        </a>
       </div>
     </section>
 
   </main>
 
-  <!-- ==================== SIMPLE FOOTER ==================== -->
-  <footer class="border-t border-white/5 py-8 text-center font-mono text-xs text-gray-600">
-    <p>Handcrafted by Justin • Based in the Netherlands 🇳🇱</p>
+  <footer class="max-w-2xl mx-auto px-6 pb-12 text-center text-xs text-neutral-400 border-t border-neutral-200/60 pt-6">
+    Built simply by Justin • Netherlands 🇳🇱
   </footer>
 
-  <!-- ==================== INTERACTIVE MODAL ==================== -->
-  <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-card border border-white/10 rounded-2xl max-w-md w-full p-6 space-y-4 relative shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white">
+  <!-- ==================== MODAL ==================== -->
+  <div id="modal" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-neutral-200 rounded-2xl max-w-sm w-full p-6 space-y-4 relative shadow-xl">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-900">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <h3 id="modalTitle" class="text-xl font-bold text-white">Project Title</h3>
-      <p id="modalDesc" class="text-gray-400 text-sm leading-relaxed">Description goes here.</p>
-      
-      <div class="space-y-1">
-        <span class="text-xs font-mono text-gray-500 uppercase">Tech Stack:</span>
-        <div id="modalTech" class="flex flex-wrap gap-2 text-xs font-mono text-cyan-400"></div>
-      </div>
-
-      <div class="pt-4 flex gap-3">
-        <a id="modalLink" href="#" target="_blank" class="w-full text-center bg-cyan-500 text-black font-semibold py-2 rounded-lg text-sm hover:bg-cyan-400 transition-colors">
-          View Repository / Demo
-        </a>
-      </div>
+      <h3 id="mTitle" class="text-lg font-bold text-neutral-900"></h3>
+      <p id="mDesc" class="text-neutral-600 text-xs leading-relaxed"></p>
+      <div id="mTags" class="flex flex-wrap gap-1.5 font-mono text-[11px] text-neutral-500"></div>
+      <button onclick="closeModal()" class="w-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-medium text-xs py-2 rounded-lg transition-colors">
+        Close
+      </button>
     </div>
   </div>
 
-  <!-- JavaScript -->
   <script>
     lucide.createIcons();
 
-    function openModal(title, desc, techArray, link) {
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalDesc').textContent = desc;
-      
-      const techContainer = document.getElementById('modalTech');
-      techContainer.innerHTML = '';
-      techArray.forEach(tech => {
-        const tag = document.createElement('span');
-        tag.className = 'px-2 py-1 bg-white/5 rounded border border-white/5 text-gray-300';
-        tag.textContent = tech;
-        techContainer.appendChild(tag);
+    function showDetails(title, desc, tags) {
+      document.getElementById('mTitle').textContent = title;
+      document.getElementById('mDesc').textContent = desc;
+      const tagsContainer = document.getElementById('mTags');
+      tagsContainer.innerHTML = '';
+      tags.forEach(t => {
+        const span = document.createElement('span');
+        span.className = 'bg-neutral-100 px-2 py-0.5 rounded';
+        span.textContent = t;
+        tagsContainer.appendChild(span);
       });
-
-      document.getElementById('modalLink').href = link;
-      document.getElementById('projectModal')?.classList.remove('hidden');
       document.getElementById('modal').classList.remove('hidden');
     }
 
     function closeModal() {
       document.getElementById('modal').classList.add('hidden');
     }
-
-    document.getElementById('modal').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('modal')) closeModal();
-    });
   </script>
 </body>
 </html>
