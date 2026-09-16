@@ -1,170 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Justin — Maker & Web Developer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfbf9; color: #242220; }
-  </style>
-</head>
-<body class="antialiased selection:bg-amber-100">
+The error **`Identifier 'supabase' has already been declared`** happens because the Supabase library script loads a global `supabase` variable, and then the code declares `const supabase = ...` using the exact same name.
 
-  <header class="max-w-2xl mx-auto px-6 pt-12 pb-8 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center font-semibold text-amber-900 text-sm">J</div>
-      <div>
-        <h1 class="font-bold text-sm text-neutral-900">Justin</h1>
-        <p class="text-xs text-neutral-500">Netherlands 🇳🇱</p>
-      </div>
-    </div>
-    <nav class="flex items-center gap-4 text-xs font-medium text-neutral-600">
-      <a href="#work" class="hover:text-neutral-900">Work</a>
-      <a href="#contact" class="hover:text-neutral-900">Contact</a>
-      <a href="admin.html" class="text-neutral-400 hover:text-neutral-800">🔒 Admin</a>
-    </nav>
-  </header>
+To fix this immediately, open **`admin.html`** and change the script setup at the bottom so it uses a different variable name (like `db`).
 
-  <main class="max-w-2xl mx-auto px-6 space-y-12 pb-20">
+---
 
-    <section class="space-y-3">
-      <h2 class="text-3xl font-bold tracking-tight text-neutral-900">
-        I build straightforward web tools and clean code.
-      </h2>
-      <p class="text-neutral-600 text-sm leading-relaxed">
-        Hey! I'm Justin, a web developer based in the Netherlands. Below are the projects managed live from my database.
-      </p>
-    </section>
+### Fixed Script for `admin.html`
 
-    <!-- LIVE PROJECTS FROM BACKEND -->
-    <section id="work" class="space-y-4">
-      <div class="border-b border-neutral-200 pb-2">
-        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Projects</span>
-      </div>
-      <div id="projectsContainer" class="space-y-3">
-        <p class="text-xs text-neutral-400">Loading projects...</p>
-      </div>
-    </section>
+Replace the entire `<script>` tag at the bottom of **`admin.html`** with this updated code:
 
-    <!-- CONTACT FORM -->
-    <section id="contact" class="bg-white border border-neutral-200/80 rounded-2xl p-6 space-y-4 shadow-sm">
-      <h3 class="text-base font-bold text-neutral-900">Send me a message</h3>
-      <form id="contactForm" class="space-y-3">
-        <input type="text" id="senderName" placeholder="Your Name" required class="w-full px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:border-amber-400">
-        <textarea id="senderMsg" placeholder="What's on your mind?" required rows="3" class="w-full px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:border-amber-400"></textarea>
-        <button type="submit" class="bg-neutral-900 text-white font-medium text-xs px-5 py-2.5 rounded-xl hover:bg-neutral-800 transition-colors">Send Message</button>
-      </form>
-
-      <!-- LIVE REPLIES DISPLAY AREA -->
-      <div id="replyBox" class="hidden mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-1">
-        <p class="text-xs font-bold text-amber-900">Justin replied to your message:</p>
-        <p id="replyText" class="text-xs text-amber-800"></p>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- NOTIFICATION PERMISSION MODAL -->
-  <div id="notifyModal" class="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white border border-neutral-200 rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-xl">
-      <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto">
-        <i data-lucide="bell" class="w-5 h-5"></i>
-      </div>
-      <h3 class="text-base font-bold text-neutral-900">Message Sent!</h3>
-      <p class="text-neutral-600 text-xs leading-relaxed">
-        Do you want me to send you a browser notification when Justin replies?
-      </p>
-      <div class="flex gap-3 pt-2">
-        <button onclick="closeNotifyModal(false)" class="flex-1 bg-neutral-100 text-neutral-700 font-medium text-xs py-2.5 rounded-xl">
-          Block / No
-        </button>
-        <button onclick="closeNotifyModal(true)" class="flex-1 bg-neutral-900 text-white font-medium text-xs py-2.5 rounded-xl">
-          Allow Notifications
-        </button>
-      </div>
-    </div>
-  </div>
-
+```html
   <script>
-    lucide.createIcons();
-
-    // SUPABASE CREDENTIALS
+    // SUPABASE CREDENTIALS (Using 'db' to prevent name conflicts)
     const SUPABASE_URL = 'https://bitrfhftckdrtdbbflbo.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpdHJmaGZ0Y2tkcnRkYmJmbGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1Njc0ODEsImV4cCI6MjEwNTE0MzQ4MX0.4e-iRsKl9KBiev5Qt3DWl0iI4tZ_ltKN5RHY9abjyo4';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let activeMessageId = null;
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-    // Load Projects from Database
-    async function loadProjects() {
-      const { data: projects, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
-      const container = document.getElementById('projectsContainer');
-      container.innerHTML = '';
+      if (!email || !password) return alert("Please enter both email and password.");
 
-      if (error || !projects.length) {
-        container.innerHTML = '<p class="text-xs text-neutral-400">No projects added yet.</p>';
+      const { data, error } = await db.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        alert("Login failed: " + error.message);
+      } else {
+        checkSession();
+      }
+    }
+
+    async function checkSession() {
+      const { data: { session } } = await db.auth.getSession();
+      if (session) {
+        document.getElementById('loginBox').classList.add('hidden');
+        document.getElementById('adminPanel').classList.remove('hidden');
+        fetchAdminProjects();
+        fetchMessages();
+      }
+    }
+
+    async function addProject() {
+      const title = document.getElementById('pTitle').value;
+      const description = document.getElementById('pDesc').value;
+      const tech = document.getElementById('pTech').value;
+
+      if (!title || !description) return alert("Fill in title and description");
+
+      await db.from('projects').insert([{ title, description, tech }]);
+      document.getElementById('pTitle').value = '';
+      document.getElementById('pDesc').value = '';
+      document.getElementById('pTech').value = '';
+      fetchAdminProjects();
+    }
+
+    async function deleteProject(id) {
+      if (confirm("Delete this project?")) {
+        await db.from('projects').delete().eq('id', id);
+        fetchAdminProjects();
+      }
+    }
+
+    async function fetchAdminProjects() {
+      const { data } = await db.from('projects').select('*').order('created_at', { ascending: false });
+      const box = document.getElementById('adminProjects');
+      box.innerHTML = '';
+      if (!data || !data.length) {
+        box.innerHTML = '<p class="text-xs text-neutral-400">No projects in database.</p>';
         return;
       }
-
-      projects.forEach(p => {
-        container.innerHTML += `
-          <div class="bg-white border border-neutral-200/80 rounded-xl p-5 space-y-2">
-            <h4 class="font-bold text-sm text-neutral-900">${p.title}</h4>
-            <p class="text-xs text-neutral-600">${p.description}</p>
-            <span class="inline-block text-[10px] font-mono bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded">${p.tech}</span>
+      data.forEach(p => {
+        box.innerHTML += `
+          <div class="bg-white p-3 border rounded-xl flex justify-between items-center text-xs">
+            <div><strong>${p.title}</strong> — <span class="text-neutral-500">${p.tech}</span></div>
+            <button onclick="deleteProject('${p.id}')" class="text-red-500 font-bold hover:underline">Delete</button>
           </div>
         `;
       });
     }
 
-    // Submit Message to Backend
-    document.getElementById('contactForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('senderName').value;
-      const message = document.getElementById('senderMsg').value;
-
-      const { data, error } = await supabase.from('messages').insert([{ sender_name: name, message }]).select();
-      
-      if (!error && data.length) {
-        activeMessageId = data[0].id;
-        document.getElementById('contactForm').reset();
-        document.getElementById('notifyModal').classList.remove('hidden');
-        listenForReply(activeMessageId);
+    async function fetchMessages() {
+      const { data } = await db.from('messages').select('*').order('created_at', { ascending: false });
+      const box = document.getElementById('adminMessages');
+      box.innerHTML = '';
+      if (!data || !data.length) {
+        box.innerHTML = '<p class="text-xs text-neutral-400">No visitor messages yet.</p>';
+        return;
       }
-    });
-
-    // Handle Visitor Notification Choice
-    async function closeNotifyModal(allow) {
-      document.getElementById('notifyModal').classList.add('hidden');
-      if (allow && "Notification" in window) {
-        const perm = await Notification.requestPermission();
-        if (perm === "granted") {
-          new Notification("Justin's Portfolio", { body: "Notifications enabled! You'll be notified when Justin replies." });
-        }
-      }
+      data.forEach(m => {
+        box.innerHTML += `
+          <div class="bg-white p-4 border rounded-xl space-y-2 text-xs">
+            <p><strong>From:</strong> ${m.sender_name}</p>
+            <p class="text-neutral-600 bg-neutral-50 p-2 rounded">${m.message}</p>
+            ${m.reply ? `<p class="text-amber-800"><strong>Your Reply:</strong> ${m.reply}</p>` : `
+              <div class="flex gap-2 pt-1">
+                <input id="reply_${m.id}" placeholder="Type reply..." class="p-2 border rounded flex-1">
+                <button onclick="sendReply('${m.id}')" class="bg-neutral-900 text-white px-3 py-1 rounded font-semibold">Reply</button>
+              </div>
+            `}
+          </div>
+        `;
+      });
     }
 
-    // Real-Time Database Subscription (Catches your replies instantly)
-    function listenForReply(messageId) {
-      supabase.channel('public:messages')
-        .on('postgres_changes', { event: 'UPDATE', filter: `id=eq.${messageId}`, table: 'messages' }, payload => {
-          if (payload.new.reply) {
-            document.getElementById('replyBox').classList.remove('hidden');
-            document.getElementById('replyText').textContent = payload.new.reply;
-
-            if ("Notification" in window && Notification.permission === "granted") {
-              new Notification("Justin replied to your message!", { body: payload.new.reply });
-            }
-          }
-        })
-        .subscribe();
+    async function sendReply(id) {
+      const reply = document.getElementById(`reply_${id}`).value;
+      if (!reply) return;
+      await db.from('messages').update({ reply }).eq('id', id);
+      fetchMessages();
     }
 
-    loadProjects();
+    checkSession();
   </script>
-</body>
-</html>
+
+```
+
+---
+
+### What about the Tailwind warning?
+
+You can safely **ignore** `cdn.tailwindcss.com should not be used in production`. That is just a standard message warning you that CDN scripts are meant for development and testing. It will not stop your code or login button from working.
