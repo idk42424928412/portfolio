@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Justin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfbf9; color: #242220; }
+  </style>
+</head>
+<body class="p-6 max-w-3xl mx-auto space-y-8">
+
+  <div class="flex justify-between items-center border-b pb-4">
+    <h1 class="text-xl font-bold">🔒 Owner Admin Panel</h1>
+    <a href="index.html" class="text-xs text-neutral-500 hover:text-neutral-900">← Back to Site</a>
+  </div>
+
+  <!-- LOGIN BOX -->
+  <div id="loginBox" class="bg-white border p-6 rounded-2xl max-w-sm mx-auto space-y-3 shadow-sm">
+    <h2 class="font-bold text-sm">Login as Owner</h2>
+    <input type="email" id="email" placeholder="Email" class="w-full p-2 border rounded text-xs focus:outline-none focus:border-amber-400">
+    <input type="password" id="password" placeholder="Password" class="w-full p-2 border rounded text-xs focus:outline-none focus:border-amber-400">
+    <button onclick="login()" class="w-full bg-neutral-900 text-white py-2 rounded text-xs font-semibold hover:bg-neutral-800">Login</button>
+  </div>
+
+  <!-- ADMIN CONTENT (Hidden until authenticated) -->
+  <div id="adminPanel" class="hidden space-y-8">
+    
+    <!-- ADD NEW PROJECT -->
+    <section class="bg-white border p-6 rounded-2xl space-y-3 shadow-sm">
+      <h3 class="font-bold text-sm">Add New Project</h3>
+      <input type="text" id="pTitle" placeholder="Project Title" class="w-full p-2 border rounded text-xs">
+      <textarea id="pDesc" placeholder="Project Description" class="w-full p-2 border rounded text-xs"></textarea>
+      <input type="text" id="pTech" placeholder="Tech Stack (e.g. Tailwind, Supabase)" class="w-full p-2 border rounded text-xs">
+      <button onclick="addProject()" class="bg-amber-600 text-white px-4 py-2 rounded text-xs font-semibold hover:bg-amber-700">Add Project</button>
+    </section>
+
+    <!-- MANAGE PROJECTS -->
+    <section class="space-y-3">
+      <h3 class="font-bold text-sm">Existing Projects</h3>
+      <div id="adminProjects" class="space-y-2"></div>
+    </section>
+
+    <!-- INBOX & REPLIES -->
+    <section class="space-y-3">
+      <h3 class="font-bold text-sm">Visitor Messages</h3>
+      <div id="adminMessages" class="space-y-3"></div>
+    </section>
+
+  </div>
+
+  <script>
+    // SUPABASE CREDENTIALS
+    const SUPABASE_URL = 'https://bitrfhftckdrtdbbflbo.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpdHJmaGZ0Y2tkcnRkYmJmbGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1Njc0ODEsImV4cCI6MjEwNTE0MzQ4MX0.4e-iRsKl9KBiev5Qt3DWl0iI4tZ_ltKN5RHY9abjyo4';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) alert("Login failed: " + error.message);
+      else checkSession();
+    }
+
+    async function checkSession() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        document.getElementById('loginBox').classList.add('hidden');
+        document.getElementById('adminPanel').classList.remove('hidden');
+        fetchAdminProjects();
+        fetchMessages();
+      }
+    }
+
+    async function addProject() {
+      const title = document.getElementById('pTitle').value;
+      const description = document.getElementById('pDesc').value;
+      const tech = document.getElementById('pTech').value;
+
+      if (!title || !description) return alert("Fill in title and description");
+
+      await supabase.from('projects').insert([{ title, description, tech }]);
+      document.getElementById('pTitle').value = '';
+      document.getElementById('pDesc').value = '';
+      document.getElementById('pTech').value = '';
+      fetchAdminProjects();
+    }
+
+    async function deleteProject(id) {
+      if (confirm("Delete this project?")) {
+        await supabase.from('projects').delete().eq('id', id);
+        fetchAdminProjects();
+      }
+    }
+
+    async function fetchAdminProjects() {
+      const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+      const box = document.getElementById('adminProjects');
+      box.innerHTML = '';
+      if (!data || !data.length) {
+        box.innerHTML = '<p class="text-xs text-neutral-400">No projects in database.</p>';
+        return;
+      }
+      data.forEach(p => {
+        box.innerHTML += `
+          <div class="bg-white p-3 border rounded-xl flex justify-between items-center text-xs">
+            <div><strong>${p.title}</strong> — <span class="text-neutral-500">${p.tech}</span></div>
+            <button onclick="deleteProject('${p.id}')" class="text-red-500 font-bold hover:underline">Delete</button>
+          </div>
+        `;
+      });
+    }
+
+    async function fetchMessages() {
+      const { data } = await supabase.from('messages').select('*').order('created_at', { ascending: false });
+      const box = document.getElementById('adminMessages');
+      box.innerHTML = '';
+      if (!data || !data.length) {
+        box.innerHTML = '<p class="text-xs text-neutral-400">No visitor messages yet.</p>';
+        return;
+      }
+      data.forEach(m => {
+        box.innerHTML += `
+          <div class="bg-white p-4 border rounded-xl space-y-2 text-xs">
+            <p><strong>From:</strong> ${m.sender_name}</p>
+            <p class="text-neutral-600 bg-neutral-50 p-2 rounded">${m.message}</p>
+            ${m.reply ? `<p class="text-amber-800"><strong>Your Reply:</strong> ${m.reply}</p>` : `
+              <div class="flex gap-2 pt-1">
+                <input id="reply_${m.id}" placeholder="Type reply..." class="p-2 border rounded flex-1">
+                <button onclick="sendReply('${m.id}')" class="bg-neutral-900 text-white px-3 py-1 rounded font-semibold">Reply</button>
+              </div>
+            `}
+          </div>
+        `;
+      });
+    }
+
+    async function sendReply(id) {
+      const reply = document.getElementById(`reply_${id}`).value;
+      if (!reply) return;
+      await supabase.from('messages').update({ reply }).eq('id', id);
+      fetchMessages();
+    }
+
+    checkSession();
+  </script>
+</body>
+</html>
